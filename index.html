@@ -146,7 +146,7 @@ button:hover {
         </div>
         
         <div class="canvas-container">
-            <canvas id="triangleCanvas" width="500" height="450"></canvas>
+            <canvas id="triangleCanvas" width="400" height="350"></canvas>
             <div class="checkbox-container">
                 <label>
                     <input type="checkbox" id="showAreaCheck" checked> Show Area Calculation
@@ -183,12 +183,13 @@ button:hover {
                     <div class="step-text">Apply the SAS area formula</div>
                 </div>
                 <p>Area = ½ × <span class="highlight">a</span> × <span class="highlight">b</span> × sin(<span class="highlight">C</span>)</p>
-                <p id="formulaWithValues">Area = ½ × 100 × 120 × sin(60°) = 5196.15 square units</p>
-            </div>
-            
-            <div class="area-result">
-                Area: <span id="areaValue">5196.15</span> square units
-            </div>
+                <p id="formulaWithValuesContainer">
+                  <span id="formulaWithValues">Area = ½ × 100 × 120 × sin(60°) = 5196.15 square units</span>
+              </p>
+              <div class="area-result" id="areaResultContainer">
+                  Area: <span id="areaValue">5196.15</span> square units
+              </div>
+              
             
             <div class="tips">
                 <strong>Important:</strong> For this formula to work, you must use the two sides that form the included angle C.
@@ -260,6 +261,11 @@ button:hover {
         function drawTriangle() {
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // Show or hide formula + area box
+    const show = showAreaCheck.checked;
+    document.getElementById("formulaWithValuesContainer").style.display = show ? "block" : "none";
+    document.getElementById("areaResultContainer").style.display = show ? "block" : "none";
+
             
             // Set canvas origin to center
             const centerX = canvas.width / 2;
